@@ -3,16 +3,19 @@ package main
 import (
 	"fmt"
 	"net"
+	"os"
 	"time"
 )
 
 const (
-	ServerHost = "172.25.0.1"
 	ServerPort = "9988"
 	ServerType = "udp"
 )
 
 func main() {
+	fmt.Println(os.Args)
+	ServerHost := os.Args[1]
+	fmt.Println(ServerHost)
 	//establish connection
 	raddr, err := net.ResolveUDPAddr(ServerType, ServerHost+":"+ServerPort)
 	if err != nil {
@@ -38,7 +41,7 @@ func main() {
 		// Set a deadline for the ReadOperation so that we don't
 		// wait forever for a server that might not respond on
 		// a resonable amount of time.
-		deadline := time.Now().Add(500)
+		deadline := time.Now().Add(time.Second * time.Duration(10))
 		err = conn.SetReadDeadline(deadline)
 		if err != nil {
 			fmt.Println("Error listening:", err.Error())

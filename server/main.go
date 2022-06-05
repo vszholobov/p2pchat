@@ -37,7 +37,7 @@ func main() {
 		fmt.Printf("Packet-Received: bytes=%d from=%s\n", n, addr.String())
 		fmt.Println(string(buffer))
 
-		deadline := time.Now().Add(500)
+		deadline := time.Now().Add(time.Second * time.Duration(10))
 		err = server.SetWriteDeadline(deadline)
 		if err != nil {
 			fmt.Println("ERROR: " + err.Error())
