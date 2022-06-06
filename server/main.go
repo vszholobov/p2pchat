@@ -8,12 +8,17 @@ import (
 )
 
 const (
-	ServerHost = "172.25.0.1"
 	ServerPort = "9988"
 	ServerType = "udp"
 )
 
 func main() {
+	fmt.Println(os.Args)
+	ServerHost := os.Args[1]
+	fmt.Println(ServerHost)
+	//establish connection
+	_, err := net.ResolveUDPAddr(ServerType, ServerHost+":"+ServerPort)
+
 	fmt.Println("Server Running...")
 	server, err := net.ListenPacket(ServerType, ServerHost+":"+ServerPort)
 	if err != nil {

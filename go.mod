@@ -1,3 +1,3 @@
-module GoChat
+module p2pchat
 
 go 1.18
